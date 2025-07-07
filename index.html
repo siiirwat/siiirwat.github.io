@@ -1,151 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <base target="_top">
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Siriwat Prompat Portfolio</title>
+  <title>ARM food</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #f9f9f9;
-    }
-    header, section {
-      padding: 2em;
-      text-align: center;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 1em;
-      background: #ffffff;
-      padding: 1em;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    nav button {
-      background: #0078d4;
-      color: #fff;
-      border: none;
-      padding: 0.7em 1.5em;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: background 0.3s;
-    }
-    nav button:hover {
-      background: #005fa3;
-    }
-    img.responsive {
-      max-width: 90%;
-      height: 400px;
-      border-radius: 1em;
-      margin: 1em 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1em;
-    }
-    .gallery img {
-      width: 250px;
-      border-radius: 0.5em;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
-    .gallery div p {
-      max-width: 250px;
-      word-wrap: break-word;
-      text-align: center;
-      margin: 0.5em auto;
-      font-size: 0.9em;
-      color: #555;
-      line-height: 1.4;
-    }
-    #about p {
-      max-width: 600px;
-      word-wrap: break-word;
-      text-align: center;
-      margin: 0.5em auto;
-      font-size: 1em;
-      color: #555;
-      line-height: 1.6;
-      padding: 0 1em;
-    }
-    h1, h2, h3 {
-      color: #333;
-    }
+    body { font-family: sans-serif; margin: 0; background: #ff9090; }
+    .container { padding: 1rem; max-width: 480px; margin: auto; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1); overflow: hidden; margin-bottom: 1rem; cursor: pointer; }
+    .card img { width: 100%; height: 200px; object-fit: cover; }
+    .card-content { padding: 0.5rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+    button { padding: 0.5rem 1rem; border: none; background: #1e88e5; color: white; border-radius: 8px; cursor: pointer; }
   </style>
 </head>
 <body>
+  <div id="root" class="container"></div>
 
-<nav>
-  <button onclick="showPage('home')">หน้าแรก</button>
-  <button onclick="showPage('about')">ประวัติผู้จัดทำ</button>
-  <button onclick="showPage('gallery')">การศึกษา</button>
-</nav>
+  <!-- React + ReactDOM CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-<section id="home">
-  <h1>Siriwat Prompat</h1>
-  <p>Teachers of Phuketthaihua ASEAN Wittaya School</p>
-  <img src="school.png" alt="โรงเรียน" class="responsive">
-</section>
+  <!-- Main App -->
+  <script type="text/babel">
+    const menuData = [
+      {
+        id: 1,
+        name: "ข้าวผัดกระเพรา",
+        price: 55,
+        image: "kp.jpg",
+        description: "ข้าวผัดกระเพราหมูราดข้าวพร้อมไข่ดาว เสิร์ฟร้อน รสจัดจ้าน"
+      },
+      {
+        id: 2,
+        name: "ก๋วยเตี๋ยวเรือ",
+        price: 50,
+        image: "kt.jpg",
+        description: "ก๋วยเตี๋ยวเรือหมูน้ำตก เส้นเหนียวนุ่ม น้ำซุปเข้มข้น หอมเครื่องเทศ"
+      },
+      {
+        id: 3,
+        name: "ชาไทย",
+        price: 30,
+        image: "ct.jpg",
+        description: "ชาไทยเย็นหวานมัน หอมชาไทยแท้ สดชื่นคลายร้อน"
+      }
+    ];
 
-<section id="about" style="display:none;">
-  <h2>ประวัติผู้จัดทำ</h2>
-  <p>
-    สวัสดีครับนักเรียนทุก ๆ คน <br>
-    ครูชื่อศิริวัฒน์ พรหมพัฒน์ ชื่อเล่น ครูอาร์ม <br>
-    ปัจจุบันเป็นครูผู้สอนสาระวิชาเทคโนโลยี <br>
-    โรงเรียนภูเก็ตไทยหัวอาเซียนวิทยา อำเภอเมืองภูเก็ต จังหวัดภูเก็ต <br>
-    สอนในระดับชั้นมัธยมศึกษาปีที่ 4-6 <br>
-    รับผิดชอบการสอน <br>
-    วิชาเทคโนโลยี วิชาการตัดต่อภาพยนตร์ วิชาการสร้างโฆษณา วิชา ioT (internet of things) 
-  </p>
-  <img src="myphoto.png" alt="Siriwat Prompat" class="responsive">
-</section>
+    function App() {
+      const [selectedFood, setSelectedFood] = React.useState(null);
 
-<section id="gallery" style="display:none;">
-  <h2>ประวัติการศึกษา</h2>
-  <div class="gallery">
-    <div>
-      <img src="primary.png" alt="ประถมศึกษา">
-      <p>ระดับประถมศึกษา <br> โรงเรียนวัดบ้านใหม่ <br> อำเภอระโนด จังหวัดสงขลา<br>จบการศึกษาปี 2555</p>
-    </div>
-    <div>
-      <img src="secondary.png" alt="มัธยมศึกษา">
-      <p>ระดับมัธยมศึกษา <br> โรงเรียนระโนดวิทยา <br> อำเภอระโนด จังหวัดสงขลา<br>จบการศึกษาปี 2558</p>
-    </div>
-    <div>
-      <img src="college.png" alt="อาชีวะศึกษา">
-      <p>ระดับประกาศนียบัตรวิชาชีพ <br> วิทยาลัยเทคนิคหาดใหญ่ <br> อำเภอหาดใหญ่ จังหวัดสงขลา<br>จบการศึกษาปี 2561</p>
-    </div>
-    <div>
-      <img src="university.png" alt="อุดมศึกษา">
-      <p>ระดับปริญญาตรี <br> คณะครุศาสตร์อุตสาหกรรมและเทคโนโลยี <br> 
-        สาขาวิชาอิเล็กทรอนิกส์และโทรคมนาคม <br> 
-        มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย วิทยาเขตสงขลา <br>
-        อำเภอเมือง จังหวัดสงขลา<br>จบการศึกษาปี 2567</p>
-    </div>
-  </div>
-</section>
+      if (selectedFood) {
+        return (
+          <div>
+            <img src={selectedFood.image} style={{width:'100%', borderRadius:'12px'}}/>
+            <h2>{selectedFood.name}</h2>
+            <p>{selectedFood.description}</p>
+            <p><strong>ราคา {selectedFood.price} บาท</strong></p>
+            <button onClick={() => setSelectedFood(null)}>ย้อนกลับ</button>
+          </div>
+        );
+      }
 
-<script>
-function showPage(page) {
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('about').style.display = 'none';
-  document.getElementById('gallery').style.display = 'none';
-  document.getElementById(page).style.display = 'block';
-}
-</script>
+      return (
+        <div>
+          {menuData.map(item => (
+            <div className="card" key={item.id} onClick={() => setSelectedFood(item)}>
+              <img src={item.image} />
+              <div className="card-content">
+                <span>{item.name}</span>
+                <span>{item.price} บาท</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
 
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
 </body>
 </html>
+
